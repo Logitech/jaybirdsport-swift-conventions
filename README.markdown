@@ -13,6 +13,7 @@ These conventions are based on the [Official raywenderlich.com Swift Style Guide
 * [Comments](#comments)
 * [Classes and Structures](#classes-and-structures)
   * [Use of Self](#use-of-self)
+  * [Collection Creation](#collection-creation)
   * [Protocol Conformance](#protocol-conformance)
   * [Computed Properties](#computed-properties)
 * [Function Declarations](#function-declarations)
@@ -213,6 +214,28 @@ class BoardLocation {
    }
  }
 }
+ ```
+
+### Collection Creation
+
+Use explicit typing and empty collections. Types to the left of the assignment, empty instances to the right.
+
+ Instead of:
+
+```swift
+var x = [String: Int]() // and
+var y = [Double]()
+var z = Set<String>()
+var mySet = MyOptionSet()
+```
+
+ use
+
+```
+var x: [String: Int] = [:]
+var y: [Double] = []
+var z: Set<String> = []
+var mySet: MyOptionSet = []
  ```
 
 ### Protocol Conformance
