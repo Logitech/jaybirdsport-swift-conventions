@@ -196,24 +196,24 @@ The example above demonstrates the following style guidelines:
 
 ### Use of Self
 
-For clarity, always use self when accessing properties of a class
+For conciseness, avoid using `self` since Swift does not require it to access an object's properties or invoke its methods.
+
+Use `self` when required to differentiate between property names and arguments in initializers, and when referencing properties in closure expressions (as required by the compiler):
 
 ```swift
-class Dog {
-  
-  var name: String?
+class BoardLocation {
+ let row: Int, column: Int
 
-  init(name: String) {
-    self.name = name
-  }
-  
-  func yellAt() {
-  	let message = "Get off the couch " + self.name
-  	print(message)
-  } 
-  
+ init(row: Int, column: Int) {
+   self.row = row
+   self.column = column
+
+   let closure = {
+     println(self.row)
+   }
+ }
 }
-``` 
+ ```
 
 ### Protocol Conformance
 
