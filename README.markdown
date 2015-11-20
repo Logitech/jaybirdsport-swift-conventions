@@ -1,4 +1,4 @@
-These conventions are based on the [Official raywenderlich.com Swift Style Guide](https://github.com/raywenderlich/swift-style-guide) and build on the following Apple documentation:
+These conventions are based on the [Official raywenderlich.com Swift Style Guide](https://github.com/raywenderlich/swift-style-guide),  [Erica Sadun's - A handful of Swift style rules](http://ericasadun.com/2015/11/17/a-handful-of-swift-style-rules-swiftlang/), and build on the following Apple documentation:
 
 * [The Swift Programming Language](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/index.html)
 * [Swift Standard Library Reference](https://developer.apple.com/library/prerelease/ios//documentation/General/Reference/SwiftStandardLibraryReference/index.html)
@@ -13,6 +13,7 @@ These conventions are based on the [Official raywenderlich.com Swift Style Guide
 * [Comments](#comments)
 * [Classes and Structures](#classes-and-structures)
   * [Use of Self](#use-of-self)
+  * [Collection Creation](#collection-creation)
   * [Protocol Conformance](#protocol-conformance)
   * [Computed Properties](#computed-properties)
 * [Function Declarations](#function-declarations)
@@ -196,24 +197,46 @@ The example above demonstrates the following style guidelines:
 
 ### Use of Self
 
-For clarity, always use self when accessing properties of a class
+For conciseness, avoid using `self` since Swift does not require it to access an object's properties or invoke its methods.
+
+Use `self` when required to differentiate between property names and arguments in initializers, and when referencing properties in closure expressions (as required by the compiler):
 
 ```swift
-class Dog {
-  
-  var name: String?
+class BoardLocation {
+ let row: Int, column: Int
 
-  init(name: String) {
-    self.name = name
-  }
-  
-  func yellAt() {
-  	let message = "Get off the couch " + self.name
-  	print(message)
-  } 
-  
+ init(row: Int, column: Int) {
+   self.row = row
+   self.column = column
+
+   let closure = {
+     print(self.row)
+   }
+ }
 }
-``` 
+ ```
+
+### Collection Creation
+
+Use explicit typing and empty collections. Types to the left of the assignment, empty instances to the right.
+
+ Instead of:
+
+```swift
+var x = [String: Int]() // and
+var y = [Double]()
+var z = Set<String>()
+var mySet = MyOptionSet()
+```
+
+ use
+
+```
+var x: [String: Int] = [:]
+var y: [Double] = []
+var z: Set<String> = []
+var mySet: MyOptionSet = []
+ ```
 
 ### Protocol Conformance
 
@@ -400,6 +423,27 @@ if let unwrappedSubview = optionalSubview {
 }
 ```
 
+When faced with excess serial bindings, interleave them with spaces and comments, as in the following example, or use a sequence of guard statements.
+
+```swift
+if let
+    // Access JSON as dictionary
+    json = json as? NSDictionary,
+
+    // Retrieve results array
+    resultsList = json["results"] as? NSArray,
+
+    // Extract first item
+    results = resultsList.firstObject as? NSDictionary,
+
+    // Extract name and price
+    name = results["trackName"] as? String,
+    price = results["price"] as? NSNumber {
+
+    // ... blah blah ...
+  }
+```
+
 ### Struct Initializers
 
 Use the native Swift struct initializers rather than the legacy CGGeometry constructors.
@@ -466,23 +510,23 @@ Prefer the `for-in` style of `for` loop over the `for-condition-increment` style
 **Preferred:**
 ```swift
 for _ in 0..<3 {
-  println("Hello three times")
+  print("Hello three times")
 }
 
 for (index, person) in enumerate(attendeeList) {
-  println("\(person) is at position #\(index)")
+  print("\(person) is at position #\(index)")
 }
 ```
 
 **Not Preferred:**
 ```swift
 for var i = 0; i < 3; i++ {
-  println("Hello three times")
+  print("Hello three times")
 }
 
 for var i = 0; i < attendeeList.count; i++ {
   let person = attendeeList[i]
-  println("\(person) is at position #\(i)")
+  print("\(person) is at position #\(i)")
 }
 ```
 
