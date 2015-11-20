@@ -1,4 +1,4 @@
-These conventions are based on the [Official raywenderlich.com Swift Style Guide](https://github.com/raywenderlich/swift-style-guide) and build on the following Apple documentation:
+These conventions are based on the [Official raywenderlich.com Swift Style Guide](https://github.com/raywenderlich/swift-style-guide),  [Erica Sadun's - A handful of Swift style rules](http://ericasadun.com/2015/11/17/a-handful-of-swift-style-rules-swiftlang/), and build on the following Apple documentation:
 
 * [The Swift Programming Language](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/index.html)
 * [Swift Standard Library Reference](https://developer.apple.com/library/prerelease/ios//documentation/General/Reference/SwiftStandardLibraryReference/index.html)
