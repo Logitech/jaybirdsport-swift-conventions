@@ -423,6 +423,27 @@ if let unwrappedSubview = optionalSubview {
 }
 ```
 
+When faced with excess serial bindings, interleave them with spaces and comments, as in the following example, or use a sequence of guard statements.
+
+```swift
+if let
+    // Access JSON as dictionary
+    json = json as? NSDictionary,
+
+    // Retrieve results array
+    resultsList = json["results"] as? NSArray,
+
+    // Extract first item
+    results = resultsList.firstObject as? NSDictionary,
+
+    // Extract name and price
+    name = results["trackName"] as? String,
+    price = results["price"] as? NSNumber {
+
+    // ... blah blah ...
+  }
+```
+
 ### Struct Initializers
 
 Use the native Swift struct initializers rather than the legacy CGGeometry constructors.
